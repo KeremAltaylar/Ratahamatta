@@ -35,31 +35,45 @@ function setup() {
       cr,
       100,
       0,
-      fxrand() * i * mes1a + windowWidth / 2,
-      fxrand() * i * mes2a + windowHeight / 2,
+      fxrand() * (windowWidth / 2) + windowWidth / 4,
+      fxrand() * (windowHeight / 2) + windowHeight / 4,
       sw1,
       2
     );
   }
-  // for (i = 0; i < 100; i++) {
-  //   particles3[i] = new Particle(
-  //     80,
-  //     70,
-  //     0,
-  //     fxrand() * i * 4 + windowWidth / 4,
-  //     fxrand() * i * 4 + windowHeight / 2,
-  //     0.3,
-  //     3
-  //   );
-  // }
+  let p3Count = 140;
+  if (windowWidth > windowHeight) {
+    p3Count += floor((windowWidth - windowHeight) * 0.5);
+  }
+  for (i = 0; i < p3Count; i++) {
+    let px, py;
+    do {
+      px = fxrand() * windowWidth;
+      py = fxrand() * windowHeight;
+    } while (
+      px > windowWidth * 0.45 &&
+      px < windowWidth * 0.55 &&
+      py > windowHeight * 0.45 &&
+      py < windowHeight * 0.55
+    );
+    particles3[i] = new Particle(
+      80,
+      70,
+      0,
+      px,
+      py,
+      0.3,
+      3
+    );
+  }
 
   for (i = 0; i < 100; i++) {
     particles2[i] = new Particle2(
       70,
       70,
       70,
-      fxrand() * i * 10,
-      fxrand() * i + windowHeight / mes2b,
+      fxrand() * windowWidth,
+      fxrand() * (windowHeight / 2),
       sw2,
       3
     );
@@ -140,19 +154,33 @@ function windowResized() {
       cr,
       100,
       0,
-      fxrand() * i * mes1a + windowWidth / 2,
-      fxrand() * i * mes2a + windowHeight / 2,
+      fxrand() * (windowWidth / 2) + windowWidth / 4,
+      fxrand() * (windowHeight / 2) + windowHeight / 4,
       sw1,
       2
     );
   }
-  for (i = 0; i < 100; i++) {
+  let p3Count = 140;
+  if (windowWidth > windowHeight) {
+    p3Count += floor((windowWidth - windowHeight) * 0.5);
+  }
+  for (i = 0; i < p3Count; i++) {
+    let px, py;
+    do {
+      px = fxrand() * windowWidth;
+      py = fxrand() * windowHeight;
+    } while (
+      px > windowWidth * 0.45 &&
+      px < windowWidth * 0.55 &&
+      py > windowHeight * 0.45 &&
+      py < windowHeight * 0.55
+    );
     particles3[i] = new Particle(
       80,
       70,
       0,
-      fxrand() * i * 4 + windowWidth / 4,
-      fxrand() * i * 4 + windowHeight / 2,
+      px,
+      py,
       0.3,
       3
     );
@@ -163,8 +191,8 @@ function windowResized() {
       70,
       70,
       70,
-      fxrand() * i * 10,
-      fxrand() * i + windowHeight / mes2b,
+      fxrand() * windowWidth,
+      fxrand() * (windowHeight / 2),
       sw2,
       3
     );
@@ -192,11 +220,71 @@ function windowResized() {
     windowHeight / 2 - 30
   );
   pop();
+  loop();
 }
 
 function fxrandRange(min, max, step) {
   value = Math.round((fxrand() * (max - min)) / step);
   return value * step + min;
+}
+
+function mousePressed() {
+  indexk = 0;
+  zoff = 0;
+  particles = [];
+  particles2 = [];
+
+  for (var i = 0; i < 100; i++) {
+    particles[i] = new Particle(
+      cr,
+      100,
+      0,
+      fxrand() * (windowWidth / 2) + windowWidth / 4,
+      fxrand() * (windowHeight / 2) + windowHeight / 4,
+      sw1,
+      2
+    );
+  }
+
+  for (var i = 0; i < 100; i++) {
+    particles2[i] = new Particle2(
+      70,
+      70,
+      70,
+      fxrand() * windowWidth,
+      fxrand() * (windowHeight / 2),
+      sw2,
+      3
+    );
+  }
+
+  let p3Count = 140;
+  if (windowWidth > windowHeight) {
+    p3Count += floor((windowWidth - windowHeight) * 0.5);
+  }
+  for (var i = 0; i < p3Count; i++) {
+    let px, py;
+    do {
+      px = fxrand() * windowWidth;
+      py = fxrand() * windowHeight;
+    } while (
+      px > windowWidth * 0.45 &&
+      px < windowWidth * 0.55 &&
+      py > windowHeight * 0.45 &&
+      py < windowHeight * 0.55
+    );
+    particles3[i] = new Particle(
+      80,
+      70,
+      0,
+      px,
+      py,
+      0.3,
+      3
+    );
+  }
+  background(0);
+  loop();
 }
 
 window.$fxhashFeatures = {
